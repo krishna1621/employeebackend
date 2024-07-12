@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const employeeController = require('../controller/employeeController');
+const employeeController1 = require('../controller/attendenceController');
+const { authenticate, authorize } = require('../middleware/authenticate');
+router.get('/', authenticate,authorize('HR'), employeeController.getAllEmployees);
+router.post('/employeeId/salary-slip',authenticate,authorize('HR'), employeeController.generateSalarySlip);
+router.post('/',authenticate,authorize('HR'), employeeController. createEmployee);
+router.get('/employees/:employeeId/salary/:filter',authenticate,authorize('HR'), employeeController1.calculateSalary);
+module.exports = router;
